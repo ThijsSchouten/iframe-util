@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>iFrame utility</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="normalize.css">
+</head>
+<style>
+    #flex-container {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+<body>
+    <div id="flex-container">
+        <div id="example">?w={width}&h={height}&url={encodeURIComponent(uri)}</div>
+
+
+
+    </div>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    <script>
+        // Get url using '&url=' + encodeURIComponent("www.google.com")
+        const queryString = window.location.search;
+        const parameters = new URLSearchParams(queryString);
+        const width = parameters.get('w') || false;
+        const height = parameters.get('h') || false;
+        const url = parameters.get('url') || false;
+
+        if (width && height && url) {
+            document.querySelector("#example").remove();
+            let iframe = document.createElement('iframe');
+
+            // div tag in which iframe will be added should have id attribute with value myDIV
+            document.querySelector("#flex-container").appendChild(iframe);
+            // provide height and width to it
+            iframe.setAttribute("style", `height:${height};width:${width};`);
+            iframe.setAttribute("frameborder", "0")
+            iframe.setAttribute("src", url)
+
+        }
+
+    </script>
+</body>
+
+</html>
